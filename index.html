@@ -1,332 +1,515 @@
 <!DOCTYPE HTML>
 <!--
-	Editorial by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+    DISORDER CAFFE — главная страница.
+
+    ВАЖНО ДЛЯ АДМИНИСТРИРОВАНИЯ И НАСТРОЙКИ САЙТА:
+    - Основная страница находится в блоке #main.
+    - Боковая панель находится в блоке #sidebar.
+    - Боковая панель закрыта при загрузке и открывается кнопкой-гамбургером.
+    - Содержимое боковой панели прокручивается отдельно от основной страницы.
+    - Не удаляйте id="sidebar" и id="main": JavaScript и CSS используют эти имена.
 -->
-<html>
-	<head>
-		<title>DISORDER CAFFE</title>
-		<head>
-			<meta charset="utf-8" />
-			<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-			<link rel="stylesheet" href="assets/css/main.css" />
-			
-			<!-- Подключение шрифта Open Sans -->
-			<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-		</head>
-		
-	<body class="is-preload">
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>DISORDER CAFFE</title>
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+    <!-- Основной стиль сайта. -->
+    <link rel="stylesheet" href="assets/css/main.css" />
 
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
+    <!-- Шрифт Open Sans. -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
-							<!-- Header -->
-								<header id="header">
-									<a href="index.html" class="logo"><strong>DISORDER CAFFE</strong> by DISORDER Official</a>
-									<ul class="icons">
-										<li><a href="https://www.youtube.com/@DISORDERCAFFE" class="icon brands fa-youtube"><span class="label">YouTube</span></a></li>
-										<li><a href="https://soundcloud.com/disordercaffe" class="icon brands fa-soundcloud"><span class="label">SoundCloud</span></a></li>
-										<li><a href="https://www.tiktok.com/@disordercaffe" class="icon brands fa-tiktok"><span class="label">TikTok</span></a></li>
-										<li><a href="x" class="icon brands fa-spotify"><span class="label">Spotify</span></a></li>
-										<li><a href="https://t.me/TheBlogByGL" class="icon brands fa-telegram"><span class="label">Telegramm</span></a></li>
-										<li><a href="https://substack.com/@disordercaffe" class="icon brands fa-facebook"><span class="label">Substack</span></a></li>
-										<li><a href="https://www.instagram.com/disordercaffe/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="https://medium.com/@disorderofficial13/" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
-									</ul>
-								</header>
+    <!--
+        ДОПОЛНИТЕЛЬНЫЕ НАСТРОЙКИ SIDEBAR.
+        Они нужны для новой логики:
+        1. sidebar закрыт изначально;
+        2. sidebar закреплён относительно окна браузера;
+        3. sidebar имеет собственную прокрутку;
+        4. прокрутка sidebar не передаётся основной странице.
 
-							<!-- Banner -->
-<section id="banner">
-    <div class="content">
-      <header>
-        <h1>Добро пожаловать в Кафешку<br />
-        DISORDER CAFFE</h1>
-        <p>Блог о жизни, пути, людях, творчестве, музыке и не только</p>
-      </header>
-  
-      <div id="text-container" style="overflow: hidden; max-height: 100px; transition: max-height 0.8s ease;">
-        <p>
-          DISORDER — это несколько беспорядочный архив мыслей, звуков и образов. Здесь ты найдёшь истории о пути, об ошибках и преодолении. Будут мысли о творчестве, о внутренней борьбе, о музыке, которая спасает. Картинах, что рождаются из тишины.
-          <br><br>
-          <br><br>Здесь смешиваются музыка, арт и обрывки воспоминаний, как страницы из дневника, который никто не должен был найти. Этот блог — как столик в дальнем углу кафе, где оставляют заметки незнакомцы. Иногда здесь появляются эссе о творчестве, иногда — обрывки мыслей, которые не оформились в трек или картину. Здесь ещё пока нет цельных историй — только фрагменты. Нет альбомов и синглов — от абстрактного эмбиента до ритмов, которые бы сводили с ума. Не собран видеоряд — клипы, скетчи, кадры из параллельных вселенных, хотя они есть. Почему-то я думаю, что есть те, кому близка эстетика полузабытых воспоминаний. Эскизы и концепты — которые могут никогда не дорасти до арта. Или случайные тексты — как записки, найденные в кармане старой куртки. Читайте, смотрите, слушайте, если хотите понять, откуда берутся мои работы. Добро пожаловать!</p>
-      </div>
-  
-      <ul class="actions">
-        <li><a href="#" class="button big" id="toggle-button">Подробнее</a></li>
-      </ul>
+        Этот блок можно позже перенести в main.css, но пока оставляем здесь,
+        чтобы было легко найти все специальные настройки главной страницы.
+    -->
+    <style>
+        /* Боковая панель является отдельным окном поверх сайта. */
+        #sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            height: 100dvh;
+            z-index: 10000;
+            margin-left: 0;
+        }
+
+        /* При наличии класса inactive панель полностью уезжает за левый край. */
+        #sidebar.inactive {
+            margin-left: -26em;
+        }
+
+        /* Внутренняя часть панели прокручивается самостоятельно. */
+        #sidebar > .inner {
+            height: 100vh;
+            height: 100dvh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            -webkit-overflow-scrolling: touch;
+            box-sizing: border-box;
+        }
+
+        /*
+            Гамбургер остаётся видимым, когда sidebar закрыт.
+            Его положение рассчитывается от ширины панели.
+        */
+        #sidebar .toggle {
+            position: absolute;
+            left: 26em;
+            top: 0;
+            z-index: 10001;
+        }
+
+        /* Ширина панели на экранах до 1680 px. */
+        @media screen and (max-width: 1680px) {
+            #sidebar.inactive {
+                margin-left: -24em;
+            }
+
+            #sidebar .toggle {
+                left: 24em;
+            }
+        }
+
+        /* На планшетах и телефонах панель также занимает весь экран по высоте. */
+        @media screen and (max-width: 1280px) {
+            #sidebar.inactive {
+                margin-left: -24em;
+            }
+
+            #sidebar > .inner {
+                height: 100vh;
+                height: 100dvh;
+            }
+        }
+
+        /* На маленьких экранах используем фактическую ширину панели шаблона. */
+        @media screen and (max-width: 736px) {
+            #sidebar.inactive {
+                margin-left: -24em;
+            }
+        }
+    </style>
+</head>
+
+<body class="is-preload">
+
+    <!-- ============================================================
+         WRAPPER — общий контейнер сайта.
+         Внутри находятся основная страница и боковая панель.
+         ============================================================ -->
+    <div id="wrapper">
+
+        <!-- ========================================================
+             MAIN — ОСНОВНАЯ СТРАНИЦА.
+             Именно эту часть прокручивает пользователь обычным скроллом.
+             ======================================================== -->
+        <div id="main">
+            <div class="inner">
+
+                <!-- Шапка сайта. -->
+                <header id="header">
+                    <a href="index.html" class="logo">
+                        <strong>DISORDER CAFFE</strong> by DISORDER Official
+                    </a>
+
+                    <!-- Социальные сети. -->
+                    <ul class="icons">
+                        <li><a href="https://www.youtube.com/@DISORDERCAFFE" class="icon brands fa-youtube"><span class="label">YouTube</span></a></li>
+                        <li><a href="https://soundcloud.com/disordercaffe" class="icon brands fa-soundcloud"><span class="label">SoundCloud</span></a></li>
+                        <li><a href="https://www.tiktok.com/@disordercaffe" class="icon brands fa-tiktok"><span class="label">TikTok</span></a></li>
+                        <li><a href="x" class="icon brands fa-spotify"><span class="label">Spotify</span></a></li>
+                        <li><a href="https://t.me/TheBlogByGL" class="icon brands fa-telegram"><span class="label">Telegram</span></a></li>
+                        <li><a href="https://substack.com/@disordercaffe" class="icon brands fa-facebook"><span class="label">Substack</span></a></li>
+                        <li><a href="https://www.instagram.com/disordercaffe/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                        <li><a href="https://medium.com/@disorderofficial13/" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+                    </ul>
+                </header>
+
+                <!-- ==================================================
+                     ПЕРВЫЙ ЭКРАН / BANNER.
+                     ================================================== -->
+                <section id="banner">
+                    <div class="content">
+                        <header>
+                            <h1>
+                                Добро пожаловать в Кафешку<br />
+                                DISORDER CAFFE
+                            </h1>
+                            <p>Блог о жизни, пути, людях, творчестве, музыке и не только</p>
+                        </header>
+
+                        <!--
+                            Этот текст сначала сокращён.
+                            Кнопка «Подробнее» раскрывает его полностью.
+                        -->
+                        <div id="text-container" style="overflow: hidden; max-height: 100px; transition: max-height 0.8s ease;">
+                            <p>
+                                DISORDER — это несколько беспорядочный архив мыслей, звуков и образов. Здесь ты найдёшь истории о пути, об ошибках и преодолении. Будут мысли о творчестве, о внутренней борьбе, о музыке, которая спасает. Картинах, что рождаются из тишины.
+                                <br><br>
+                                <br><br>
+                                Здесь смешиваются музыка, арт и обрывки воспоминаний, как страницы из дневника, который никто не должен был найти. Этот блог — как столик в дальнем углу кафе, где оставляют заметки незнакомцы. Иногда здесь появляются эссе о творчестве, иногда — обрывки мыслей, которые не оформились в трек или картину. Здесь ещё пока нет цельных историй — только фрагменты. Нет альбомов и синглов — от абстрактного эмбиента до ритмов, которые бы сводили с ума. Не собран видеоряд — клипы, скетчи, кадры из параллельных вселенных, хотя они есть. Почему-то я думаю, что есть те, кому близка эстетика полузабытых воспоминаний. Эскизы и концепты — которые могут никогда не дорасти до арта. Или случайные тексты — как записки, найденные в кармане старой куртки. Читайте, смотрите, слушайте, если хотите понять, откуда берутся мои работы. Добро пожаловать!
+                            </p>
+                        </div>
+
+                        <ul class="actions">
+                            <li>
+                                <a href="#" class="button big" id="toggle-button">Подробнее</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <span class="image object">
+                        <img src="images/pic10.jpg" alt="DISORDER CAFFE" />
+                    </span>
+                </section>
+
+                <!-- ==================================================
+                     ЭКСКУРСИЯ.
+                     ================================================== -->
+                <section>
+                    <header class="major">
+                        <h2>ЭКСКУРСИЯ</h2>
+                    </header>
+
+                    <div class="features">
+                        <article>
+                            <span class="icon solid fa-landmark"></span>
+                            <div class="content">
+                                <h3>МУЗЕЙ</h3>
+                                <p>Архив мыслей, звуков и образов.</p>
+                                <a href="museum.html" class="button">Перейти</a>
+                            </div>
+                        </article>
+
+                        <article>
+                            <span class="icon solid fa-video"></span>
+                            <div class="content">
+                                <h3>ВИДЕОЗАЛ</h3>
+                                <p>Новые клипы и видеоработы.</p>
+                                <a href="video.html" class="button">Перейти</a>
+                            </div>
+                        </article>
+
+                        <article>
+                            <span class="icon solid fa-images"></span>
+                            <div class="content">
+                                <h3>ГАЛЕРЕЯ</h3>
+                                <p>Коллекция визуальных работ и арт-объектов.</p>
+                                <a href="gallery.html" class="button">Перейти</a>
+                            </div>
+                        </article>
+
+                        <article>
+                            <span class="icon solid fa-camera-retro"></span>
+                            <div class="content">
+                                <h3>ФОТОАЛЬБОМ</h3>
+                                <p>Фотографии и визуальные заметки.</p>
+                                <a href="photo.html" class="button">Перейти</a>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+        <!-- ========================================================
+             SIDEBAR — БОКОВАЯ ПАНЕЛЬ.
+
+             ВАЖНО:
+             - она закрыта при загрузке;
+             - открывается гамбургером;
+             - прокручивается независимо от #main;
+             - контактная информация и форма находятся именно здесь.
+             ======================================================== -->
+        <aside id="sidebar" class="inactive" aria-label="Боковое меню">
+            <div class="inner">
+
+                <!-- Поиск. -->
+                <section id="search" class="alt">
+                    <form method="post" action="#">
+                        <input type="text" name="query" id="query" placeholder="Search" />
+                    </form>
+                </section>
+
+                <!-- Главное меню сайта. -->
+                <nav id="menu" aria-label="Главное меню">
+                    <header class="major">
+                        <h2>Меню</h2>
+                    </header>
+
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="generic.html">Не начало</a></li>
+                        <li>
+                            <span class="opener">ЭКСКУРСИЯ</span>
+                            <ul>
+                                <li><a href="museum.html">МУЗЕЙ</a></li>
+                                <li><a href="video.html">ВИДЕОЗАЛ</a></li>
+                                <li><a href="gallery.html">ГАЛЕРЕЯ</a></li>
+                                <li><a href="photo.html">ФОТОАЛЬБОМ</a></li>
+                                <li><a href="phonoteca.html">ФОНОТЕКА</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Аудиокнига. -->
+                <section>
+                    <header class="major">
+                        <h2>АУДИОКНИГА</h2>
+                    </header>
+
+                    <div class="mini-posts">
+                        <article>
+                            <a href="audiobook.html" class="image">
+                                <img src="images.plus/teatime.jpg" alt="Аудиокнига DISORDER CAFFE" />
+                            </a>
+                            <p>Чай. Уютная атмосфера.</p>
+                        </article>
+                    </div>
+
+                    <ul class="actions">
+                        <li><a href="audiobook.html" class="button">Перейти</a></li>
+                    </ul>
+                </section>
+
+                <!-- ==================================================
+                     КОНТАКТНАЯ ИНФОРМАЦИЯ.
+                     ================================================== -->
+                <section>
+                    <header class="major">
+                        <h2>Контактная информация</h2>
+                    </header>
+
+                    <p>
+                        Кому близко моё творчество — буду весьма признателен за вашу реакцию! Лайки, комментарии, репосты и подписки — лучшая поддержка и стимул двигаться дальше. Ссылки на соцсети и площадки находятся в шапке сайта — (просто кликнуть на нужный значок и уже на месте). Также есть форма обратной связи ниже.
+                    </p>
+
+                    <p>
+                        Каждое сообщение, отзыв или даже простое упоминание — это ценно! Спасибо, за интерес и за способствование делать творчество осмысленным!
+                    </p>
+
+                    <p>
+                        P.S. Если есть возможность поддержать проект материально — буду чрезмерно благодарен! Детали — через личку.
+                    </p>
+
+                    <ul class="contact">
+                        <li class="icon solid fa-envelope">
+                            <a href="mailto:info.disorder@proton.me">info.disorder@proton.me</a>
+                        </li>
+                        <li class="icon solid fa-phone">+1 (345) 745-50-10</li>
+                        <li class="icon solid fa-home">
+                            P.O. Box 10190, Century Yard, 4th Floor, 36 North Church Street, George Town, Grand Cayman.<br />
+                            KY1-1109, Cayman Islands
+                        </li>
+                    </ul>
+
+                    <!-- ==================================================
+                         ФОРМА ОБРАТНОЙ СВЯЗИ.
+                         Отправка выполняется через Formspree.
+                         ================================================== -->
+                    <section id="contact">
+                        <h2>Связаться со мной</h2>
+
+                        <form id="contact-form">
+                            <div class="fields">
+                                <div class="field half">
+                                    <label for="name">Имя</label>
+                                    <input type="text" name="name" id="name" placeholder="Ваше имя" required />
+                                </div>
+
+                                <div class="field half">
+                                    <label for="email">Email</label>
+                                    <input type="email" name="email" id="email" placeholder="Ваш Email" required />
+                                </div>
+
+                                <div class="field">
+                                    <label for="message">Сообщение</label>
+                                    <textarea name="message" id="message" placeholder="Ваше сообщение" rows="6" required></textarea>
+                                </div>
+                            </div>
+
+                            <ul class="actions">
+                                <li>
+                                    <button id="submit-button" type="submit" class="button submit">
+                                        Отправить сообщение
+                                    </button>
+                                </li>
+                            </ul>
+
+                            <!-- Сообщение при успешной отправке. -->
+                            <div id="form-message" style="display:none; margin-top:20px; color:#28a745; font-weight:bold; font-size:1.2em;">
+                                Спасибо! Ваше сообщение успешно отправлено.
+                            </div>
+
+                            <!-- Сообщение при ошибке. -->
+                            <div id="form-error" style="display:none; margin-top:20px; color:red; font-weight:bold; font-size:1.2em;">
+                                Ошибка отправки. Пожалуйста, попробуйте позже.
+                            </div>
+                        </form>
+                    </section>
+                </section>
+
+                <!-- Нижняя часть самой боковой панели. -->
+                <footer id="footer">
+                    <p class="copyright">
+                        &copy; DISORDER Official. All rights reserved.<br />
+                        Telegram-канал:
+                        <a href="https://t.me/TheBlogByGL">The Blog by GL</a>.<br />
+                        General:
+                        <a href="https://t.me/+O2L7yu_TYKQ0MDE8">Limited access to private</a>.
+                    </p>
+                </footer>
+
+            </div>
+        </aside>
+
     </div>
-    <span class="image object">
-      <img src="images/pic10.jpg" alt="" />
-    </span>
-  </section>
-  
 
-							<!-- Section -->
-								<section>
-									<header class="major">
-										<h2>ЭКСКУРСИЯ</h2>
-									</header>
-									<div class="features">
-										<article>
-											<span class="icon solid fa-landmark"></span>
-											<div class="content">
-												<h3>МУЗЕЙ</h3>
-												<p>Архив мыслей, звуков и образов.</p>
-												<a href="museum.html" class="button">Перейти</a>
-											</div>	
-										</article>
-										<article>
-											<span class="icon solid fa-video"></span>
-											<div class="content">
-												<h3>ВИДЕОЗАЛ</h3>
-												<p>Новые клипы и видеоработы.</p>
-												<a href="video.html" class="button">Перейти</a>
-											</div>
-										</article>
-										<article>
-											<span class="icon solid fa-images"></span>
-											<div class="content">
-												<h3>ГАЛЕРЕЯ</h3>
-												<p>Коллекция визуальных работ и арт-объектов.</p>
-												<a href="gallery.html" class="button">Перейти</a>
-											</div>
-										</article>
-										<article>
-											<span class="icon solid fa-camera-retro"></span>
-											<div class="content">
-												<h3>ФОТОАЛЬБОМ</h3>
-												<p>Фотографии и визуальные заметки.</p>
-												<a href="photo.html" class="button">Перейти</a>
-											</div>
-										</article>
-									</div>
-								</section>
+    <!-- ============================================================
+         НИЖНИЙ FOOTER ОСНОВНОЙ СТРАНИЦЫ.
+         Теперь он находится ВНУТРИ <body>, а не после </body>.
+         Это исправляет неправильную HTML-структуру исходного файла.
+         ============================================================ -->
+    <footer id="site-footer" style="background:#7089fa; color:#443e3e; padding:40px 20px;">
+        <div class="inner" style="display:flex; flex-wrap:wrap; justify-content:space-between;">
 
-							
+            <!-- Описание бренда. -->
+            <div class="footer-section" style="flex:1; min-width:200px; margin-bottom:20px;">
+                <h4>Брэнд</h4>
+                <p>
+                    DISORDER CAFFE — это творческое пространство, соединяющее музыку, визуальное искусство, мысли и ощущения.
+                </p>
+            </div>
 
-						</div>
-					</div>
+            <!-- FAQ. -->
+            <div class="footer-section" style="flex:1; min-width:200px; margin-bottom:20px;">
+                <h4>FAQ</h4>
+                <ul style="list-style:none; padding:0;">
+                    <li><a href="thanks.html" style="color:#443e3e;">Возможно ли сделать заказ?</a></li>
+                    <li><a href="thanks.html" style="color:#443e3e;">Можно ли предлагать идеи?</a></li>
+                    <li><a href="museum.html" style="color:#443e3e;">Что такое DISORDER?</a></li>
+                </ul>
+            </div>
 
-				<!-- Sidebar -->
-					<div id="sidebar">
-						<div class="inner">
+            <!-- Контакты. -->
+            <div class="footer-section" style="flex:1; min-width:200px; margin-bottom:20px;">
+                <h4>Контакты</h4>
+                <ul style="list-style:none; padding:0;">
+                    <li>Email: disordercaffe@pm.me</li>
+                    <li>Proffer: info.disordercaffe@pm.me</li>
+                    <li>Telegram: @TheBlogByGL</li>
+                    <li>Telegram-bot: @DisorderCaffeBot</li>
+                </ul>
+            </div>
+        </div>
 
-							<!-- Search -->
-								<section id="search" class="alt">
-									<form method="post" action="#">
-										<input type="text" name="query" id="query" placeholder="Search" />
-									</form>
-								</section>
+        <div style="text-align:center; padding-top:20px; font-size:0.8em; color:#443e3e;">
+            &copy; 2025 DISORDER CAFFE. Все права защищены.
+        </div>
+    </footer>
 
-							<!-- Menu -->
-								<nav id="menu">
-									<header class="major">
-										<h2>Меню</h2>
-									</header>
-									<ul>
-										<li><a href="index.html">Главная</a></li>
-										<li><a href="generic.html">Не начало</a></li>
-										<li>
-											<span class="opener">ЭКСКУРСИЯ</span>
-											<ul>
-												<li><a href="museum.html">МУЗЕЙ</a></li>
-												<li><a href="video.html">ВИДЕОЗАЛ</a></li>
-												<li><a href="gallery.html">ГАЛЕРЕЯ</a></li>
-												<li><a href="photo.html">ФОТОАЛЬБОМ</a></li>
-												<li><a href="phonoteca.html">ФОНОТЕКА</a></li>
-											</ul>
-												
-									</ul>
-								</nav>
+    <!-- ============================================================
+         JAVASCRIPT.
+         ============================================================ -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
 
-							<!-- Section -->
-							<section>
-								<header class="major">
-									<h2>АУДИОКНИГА</h2>
-								</header>
-								<div class="mini-posts">	
-									<article>
-										<a href="#" class="image"><img src="images.plus/teatime.jpg" alt="" /></a>
-										<p>Чай. Уютная атмосфера.</p>
-									</article>
-									
-									<li><a href="audiobook.html" class="button">Перейти</a></li>
-								</ul>
-							</section>
+    <!-- Раскрытие текста «Подробнее». -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const textContainer = document.getElementById('text-container');
+            const toggleButton = document.getElementById('toggle-button');
 
-							<!-- Section -->
-							<section>
-								<header class="major">
-									<h2>Контактная информация</h2>
-								</header>
-								<p>Кому близко моё творчество — буду весьма признателен за вашу реакцию! Лайки, комментарии, репосты и подписки  — лучшая поддержка и стимул двигаться дальше. Ссылки на соцсети и площадки находятся в шапке сайта — (просто кликнуть на нужный значок и уже на месте). Также есть форма обратной связи ниже.</p>
-								<p>Каждое сообщение, отзыв или даже простое упоминание — это ценно! Спасибо, за интерес и за способствование делать творчество осмысленным!</p>
-								<p>P.S. Если есть возможность поддержать проект материально — буду чрезмерно благодарен! Детали — через личку.</p>
-								<ul class="contact">
-									<li class="icon solid fa-envelope"><a href="#">info.disorder@proton.me</a></li>
-									<li class="icon solid fa-phone">+1 (345) 745-50-10</li>
-									<li class="icon solid fa-home">P.O. Box 10190, Century Yard, 4th Floor, 36 North Church Street, George Town, Grand Cayman.<br />
-										KY1-1109, Cayman Islands</li>
-								</ul>
-								<section id="contact">
-									<h2>Связаться со мной</h2>
-									<form id="contact-form">
-										<div class="fields">
-											<div class="field half">
-												<label for="name">Имя</label>
-												<input type="text" name="name" id="name" placeholder="Ваше имя" required />
-											</div>
-											<div class="field half">
-												<label for="email">Email</label>
-												<input type="email" name="email" id="email" placeholder="Ваш Email" required />
-											</div>
-											<div class="field">
-												<label for="message">Сообщение</label>
-												<textarea name="message" id="message" placeholder="Ваше сообщение" rows="6" required></textarea>
-											</div>
-										</div>
-										<ul class="actions">
-											<li><button id="submit-button" type="submit" class="button submit">Отправить сообщение</button></li>
-										</ul>
-									
-										<!-- Сообщение об успешной отправке -->
-										<div id="form-message" style="display:none; margin-top: 20px; color: #28a745; font-weight: bold; font-size: 1.2em;">
-											Спасибо! Ваше сообщение успешно отправлено.
-										</div>
-										<!-- Сообщение об ошибке -->
-										<div id="form-error" style="display:none; margin-top: 20px; color: red; font-weight: bold; font-size: 1.2em;">
-											Ошибка отправки. Пожалуйста, попробуйте позже.
-										</div>
-									</form>
-									
-									<!-- Скрипт для обработки отправки -->
-									<script>
-									document.getElementById('contact-form').addEventListener('submit', async function(event) {
-										event.preventDefault();
-									
-										const form = event.target;
-										const submitButton = document.getElementById('submit-button');
-										const formMessage = document.getElementById('form-message');
-										const formError = document.getElementById('form-error');
-									
-										// Изменяем текст кнопки
-										submitButton.textContent = 'Отправляется...';
-										submitButton.disabled = true;
-									
-										const formData = new FormData(form);
-									
-										try {
-											const response = await fetch('https://formspree.io/f/mgvkovql', {
-												method: 'POST',
-												body: formData,
-												headers: {
-													'Accept': 'application/json'
-												}
-											});
-									
-											if (response.ok) {
-												form.reset();
-												formMessage.style.display = 'block';
-												formError.style.display = 'none';
-											} else {
-												formMessage.style.display = 'none';
-												formError.style.display = 'block';
-											}
-										} catch (error) {
-											formMessage.style.display = 'none';
-											formError.style.display = 'block';
-										}
-									
-										// Возвращаем кнопку обратно через 5 секунд
-										setTimeout(() => {
-											submitButton.textContent = 'Отправить сообщение';
-											submitButton.disabled = false;
-											formMessage.style.display = 'none';
-											formError.style.display = 'none';
-										}, 5000);
-									});
-									</script>
-									
-									
-								  </section>
-								  
+            if (!textContainer || !toggleButton) {
+                return;
+            }
 
-							<!-- Footer -->
-								<footer id="footer">
-									<p class="copyright">&copy; DISORDER Official. All rights reserved. Telegramm-chanal: <a href="https://t.me/TheBlogByGL">The Blog by GL</a>. General: <a href="https://t.me/+O2L7yu_TYKQ0MDE8">Limited access to private</a>.</p>
-								</footer>
+            let expanded = false;
 
-						</div>
-					</div>
+            toggleButton.addEventListener('click', function (event) {
+                event.preventDefault();
 
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-            <script>
-                const textContainer = document.getElementById('text-container');
-                const toggleButton = document.getElementById('toggle-button');
-                let expanded = false;
-              
-                toggleButton.addEventListener('click', function(event) {
-                  event.preventDefault();
-                  if (!expanded) {
-                    textContainer.style.maxHeight = textContainer.scrollHeight + "px";
-                    toggleButton.textContent = "Скрыть";
+                if (!expanded) {
+                    textContainer.style.maxHeight = textContainer.scrollHeight + 'px';
+                    toggleButton.textContent = 'Скрыть';
                     expanded = true;
-                  } else {
-                    textContainer.style.maxHeight = "100px";
-                    toggleButton.textContent = "Подробнее";
+                } else {
+                    textContainer.style.maxHeight = '100px';
+                    toggleButton.textContent = 'Подробнее';
                     expanded = false;
-                  }
-                });
-              </script>
-              </body> 
-			  <footer id="footer" style="background: #7089fa; color: #443e3e; padding: 40px 20px;">
-				<div class="inner" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
-				  <!---->
-				  <div class="footer-section" style="flex: 1; min-width: 200px; margin-bottom: 20px;">
-					<h4>Брэнд</h4>
-					<p>DISORDER CAFFE — это творческое пространство, соединяющее музыку, визуальное искусство, мысли и ощущения.</p>
-				  </div>
-			  
-				  <!-- FAQ -->
-				  <div class="footer-section" style="flex: 1; min-width: 200px; margin-bottom: 20px;">
-					<h4>FAQ</h4>
-					<ul style="list-style: none; padding: 0;">
-					  <li><a href="thanks.html" style="color: #443e3e;">Возможно ли сделать заказ?</a></li>
-					  <li><a href="thanks.html" style="color: #443e3e;">Можно ли предлагать идеи?</a></li>
-					  <li><a href="museum.html" style="color: #443e3e">Что такое DISORDER?</a></li>
-					</ul>
-				  </div>
-			  
-				  <!-- Контакты -->
-				  <div class="footer-section" style="flex: 1; min-width: 200px; margin-bottom: 20px;">
-					<h4>Контакты</h4>
-					<ul style="list-style: none; padding: 0;">
-					  <li>Email: disordercaffe@pm.me</li>
-					  <li>Proffer: info.disordercaffe@pm.me</li>
-					  <li>Telegram: @TheBlogByGL</li>
-					  <li>Telegram-bot: @DisorderCaffeBot</li>
-					</ul>
-				  </div>
-				</div>
-				<div style="text-align: center; padding-top: 20px; font-size: 0.8em; color:#443e3e">
-				  © 2025 DISORDER CAFFE. Все права защищены.
-				</div>
+                }
+            });
+        });
+    </script>
 
-			  </footer>
-			   
-	
-	  
+    <!-- Обработка формы обратной связи. -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('contact-form');
+
+            if (!form) {
+                return;
+            }
+
+            form.addEventListener('submit', async function (event) {
+                event.preventDefault();
+
+                const submitButton = document.getElementById('submit-button');
+                const formMessage = document.getElementById('form-message');
+                const formError = document.getElementById('form-error');
+                const formData = new FormData(form);
+
+                submitButton.textContent = 'Отправляется...';
+                submitButton.disabled = true;
+
+                try {
+                    const response = await fetch('https://formspree.io/f/mgvkovql', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        form.reset();
+                        formMessage.style.display = 'block';
+                        formError.style.display = 'none';
+                    } else {
+                        formMessage.style.display = 'none';
+                        formError.style.display = 'block';
+                    }
+                } catch (error) {
+                    formMessage.style.display = 'none';
+                    formError.style.display = 'block';
+                }
+
+                setTimeout(function () {
+                    submitButton.textContent = 'Отправить сообщение';
+                    submitButton.disabled = false;
+                    formMessage.style.display = 'none';
+                    formError.style.display = 'none';
+                }, 5000);
+            });
+        });
+    </script>
+
+</body>
 </html>
