@@ -1,7 +1,5 @@
 /*
-	Editorial by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	DISORDER Official production
 */
 
 (function($) {
@@ -70,169 +68,104 @@
 				});
 
 	// Sidebar.
-		var $sidebar = $('#sidebar'),
-			$sidebar_inner = $sidebar.children('.inner');
+	//
+	// В этой версии боковая панель ВСЕГДА закрыта при загрузке.
+	// На всех размерах экрана она открывается только кнопкой-гамбургером.
+	// Важно: старый Scroll lock здесь намеренно удалён.
+	// Он двигал sidebar вслед за основной страницей и мог вызывать скачки.
 
-		// Inactive by default on <= large.
-			breakpoints.on('<=large', function() {
-				$sidebar.addClass('inactive');
-			});
+		var $sidebar = $('#sidebar');
 
-			breakpoints.on('>large', function() {
-				$sidebar.removeClass('inactive');
-			});
+		if ($sidebar.length) {
 
-		// Hack: Workaround for Chrome/Android scrollbar position bug.
-			if (browser.os == 'android'
-			&&	browser.name == 'chrome')
-				$('<style>#sidebar .inner::-webkit-scrollbar { display: none; }</style>')
-					.appendTo($head);
+			// Закрываем sidebar при загрузке страницы.
+			$sidebar.addClass('inactive');
 
-		// Toggle.
-			$('<a href="#sidebar" class="toggle">Toggle</a>')
+			// Создаём кнопку-гамбургер.
+			$('<a href="#sidebar" class="toggle" aria-label="Открыть меню">Toggle</a>')
 				.appendTo($sidebar)
 				.on('click', function(event) {
 
-					// Prevent default.
-						event.preventDefault();
-						event.stopPropagation();
+					// Не даём браузеру переходить к якорю #sidebar.
+					event.preventDefault();
+					event.stopPropagation();
 
-					// Toggle.
-						$sidebar.toggleClass('inactive');
-
-				});
-
-		// Events.
-
-			// Link clicks.
-				$sidebar.on('click', 'a', function(event) {
-
-					// >large? Bail.
-						if (breakpoints.active('>large'))
-							return;
-
-					// Vars.
-						var $a = $(this),
-							href = $a.attr('href'),
-							target = $a.attr('target');
-
-					// Prevent default.
-						event.preventDefault();
-						event.stopPropagation();
-
-					// Check URL.
-						if (!href || href == '#' || href == '')
-							return;
-
-					// Hide sidebar.
-						$sidebar.addClass('inactive');
-
-					// Redirect to href.
-						setTimeout(function() {
-
-							if (target == '_blank')
-								window.open(href);
-							else
-								window.location.href = href;
-
-						}, 500);
+					// Открыть / закрыть панель.
+					$sidebar.toggleClass('inactive');
 
 				});
 
-			// Prevent certain events inside the panel from bubbling.
-				$sidebar.on('click touchend touchstart touchmove', function(event) {
+			// Клики по ссылкам внутри sidebar.
+			// После выбора страницы меню закрывается.
+			$sidebar.on('click', 'a', function(event) {
 
-					// >large? Bail.
-						if (breakpoints.active('>large'))
-							return;
+				var $a = $(this),
+					href = $a.attr('href'),
+					target = $a.attr('target');
 
-					// Prevent propagation.
-						event.stopPropagation();
+				// Кнопка-гамбургер обрабатывается отдельно выше.
+				if ($a.hasClass('toggle'))
+					return;
 
-				});
+				// Не мешаем пустым ссылкам.
+				if (!href || href == '#' || href == '')
+					return;
 
-			// Hide panel on body click/tap.
-				$body.on('click touchend', function(event) {
+				// Закрываем панель перед переходом.
+				$sidebar.addClass('inactive');
 
-					// >large? Bail.
-						if (breakpoints.active('>large'))
-							return;
+				// Для обычной ссылки оставляем стандартный переход.
+				// Для target="_blank" открываем новую вкладку.
+				if (target == '_blank') {
+					event.preventDefault();
+					window.open(href, '_blank');
+				}
 
-					// Deactivate.
-						$sidebar.addClass('inactive');
+			});
 
-				});
+			// События внутри панели не должны закрывать её.
+			$sidebar.on('click touchstart touchmove wheel', function(event) {
+				event.stopPropagation();
+			});
 
-		// Scroll lock.
-		// Note: If you do anything to change the height of the sidebar's content, be sure to
-		// trigger 'resize.sidebar-lock' on $window so stuff doesn't get out of sync.
+			// Клик вне панели закрывает её.
+			$body.on('click touchend', function() {
+				$sidebar.addClass('inactive');
+			});
 
-			$window.on('load.sidebar-lock', function() {
+		}
 
-				var sh, wh, st;
+	// Back to top.
+	// ---------------------------------------------------------------------
+	// Создаём одну общую кнопку "Наверх" для ВСЕХ страниц сайта.
+	// Кнопка не требует отдельного HTML-кода на каждой странице:
+	// JavaScript сам добавляет её в <body>.
+	//
+	// После прокрутки вниз кнопка появляется в правом нижнем углу.
+	// При клике страница плавно возвращается в самое начало.
+	// ---------------------------------------------------------------------
 
-				// Reset scroll position to 0 if it's 1.
-					if ($window.scrollTop() == 1)
-						$window.scrollTop(0);
+		var $backToTop = $('<button type="button" class="back-to-top" aria-label="Вернуться в начало страницы" title="Наверх">↑</button>')
+			.appendTo($body);
 
-				$window
-					.on('scroll.sidebar-lock', function() {
+		// Показываем кнопку только после небольшой прокрутки.
+		// 300 px — достаточно, чтобы она не мешала на первом экране.
+		$window.on('scroll.back-to-top', function() {
+			if ($window.scrollTop() > 300)
+				$backToTop.addClass('is-visible');
+			else
+				$backToTop.removeClass('is-visible');
+		});
 
-						var x, y;
+		// Плавный возврат в начало страницы.
+		$backToTop.on('click', function(event) {
+			event.preventDefault();
 
-						// <=large? Bail.
-							if (breakpoints.active('<=large')) {
+			$('html, body').stop(true, false).animate({
+				scrollTop: 0
+			}, 600);
+		});
 
-								$sidebar_inner
-									.data('locked', 0)
-									.css('position', '')
-									.css('top', '');
-
-								return;
-
-							}
-
-						// Calculate positions.
-							x = Math.max(sh - wh, 0);
-							y = Math.max(0, $window.scrollTop() - x);
-
-						// Lock/unlock.
-							if ($sidebar_inner.data('locked') == 1) {
-
-								if (y <= 0)
-									$sidebar_inner
-										.data('locked', 0)
-										.css('position', '')
-										.css('top', '');
-								else
-									$sidebar_inner
-										.css('top', -1 * x);
-
-							}
-							else {
-
-								if (y > 0)
-									$sidebar_inner
-										.data('locked', 1)
-										.css('position', 'fixed')
-										.css('top', -1 * x);
-
-							}
-
-					})
-					.on('resize.sidebar-lock', function() {
-
-						// Calculate heights.
-							wh = $window.height();
-							sh = $sidebar_inner.outerHeight() + 30;
-
-						// Trigger scroll.
-							$window.trigger('scroll.sidebar-lock');
-
-					})
-					.trigger('resize.sidebar-lock');
-
-				});
 
 	// Menu.
 		var $menu = $('#menu'),
@@ -252,8 +185,6 @@
 						$menu_openers.not($this).removeClass('active');
 						$this.toggleClass('active');
 
-					// Trigger resize (sidebar lock).
-						$window.triggerHandler('resize.sidebar-lock');
 
 				});
 
