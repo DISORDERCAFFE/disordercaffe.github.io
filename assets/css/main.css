@@ -2278,3 +2278,139 @@ button,
     border-top: 0;
     margin-top: 0;
     padding-top: 0; }
+
+/* ========================================================================
+   DISORDER CAFFE — НОВАЯ ЛОГИКА БОКОВОЙ ПАНЕЛИ
+   ------------------------------------------------------------------------
+   Этот блок добавлен отдельно в самый конец файла, чтобы не ломать
+   исходные стили шаблона Editorial.
+
+   Что он делает:
+   1. Sidebar закрыт при загрузке.
+   2. Sidebar является самостоятельной панелью поверх основной страницы.
+   3. Sidebar прокручивается независимо.
+   4. Прокрутка sidebar не передаётся основной странице.
+   5. Гамбургер остаётся доступным на всех страницах, где есть #sidebar.
+   ======================================================================== */
+
+#sidebar {
+  position: fixed !important;
+  left: 0 !important;
+  top: 0 !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  z-index: 10000 !important;
+  margin-left: 0;
+}
+
+#sidebar.inactive {
+  margin-left: -26em;
+}
+
+#sidebar > .inner {
+  height: 100vh !important;
+  height: 100dvh !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+}
+
+#sidebar .toggle {
+  position: absolute !important;
+  left: 26em;
+  top: 0;
+  z-index: 10001;
+}
+
+@media screen and (max-width: 1680px) {
+  #sidebar.inactive {
+    margin-left: -24em;
+  }
+
+  #sidebar .toggle {
+    left: 24em;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  #sidebar.inactive {
+    margin-left: -24em;
+  }
+
+  #sidebar > .inner {
+    height: 100vh !important;
+    height: 100dvh !important;
+  }
+}
+
+@media screen and (max-width: 736px) {
+  #sidebar.inactive {
+    margin-left: -24em;
+  }
+}
+
+/* ========================================================================
+   DISORDER CAFFE — КНОПКА "НАВЕРХ"
+   ------------------------------------------------------------------------
+   Кнопка создаётся автоматически через assets/js/main.js.
+
+   Что она делает:
+   1. Находится всегда в правом нижнем углу окна браузера.
+   2. До прокрутки вниз она скрыта.
+   3. После прокрутки примерно на 300 px появляется.
+   4. При нажатии плавно возвращает пользователя в начало страницы.
+   5. Эти стили действуют на всех страницах, которые используют main.css.
+   ======================================================================== */
+
+.back-to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(61, 62, 63, 0.92);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 48px;
+  text-align: center;
+  cursor: pointer;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease, background 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+/* Кнопка становится видимой после прокрутки страницы вниз. */
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Небольшое изменение при наведении мыши. */
+.back-to-top:hover {
+  background: #7089fa;
+}
+
+/* На телефоне немного уменьшаем кнопку и отступ от краёв. */
+@media screen and (max-width: 736px) {
+  .back-to-top {
+    right: 16px;
+    bottom: 16px;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    font-size: 25px;
+  }
+}
+
+
