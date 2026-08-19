@@ -1,5 +1,5 @@
 /*
-	DISORDER Official production
+	DISORDER CAFFE Official production
 */
 
 (function($) {
@@ -74,66 +74,93 @@
 	// Важно: старый Scroll lock здесь намеренно удалён.
 	// Он двигал sidebar вслед за основной страницей и мог вызывать скачки.
 
-		var $sidebar = $('#sidebar');
+		// Sidebar.
+	var $sidebar = $('#sidebar');
 
-		if ($sidebar.length) {
+	if ($sidebar.length) {
 
-			// Закрываем sidebar при загрузке страницы.
+		// Sidebar всегда закрыт при загрузке.
+		$sidebar.addClass('inactive');
+
+		// Создаём кнопку-гамбургер.
+		$('<a href="#sidebar" class="toggle" aria-label="Открыть меню">Toggle</a>')
+			.appendTo($sidebar)
+			.on('click', function(event) {
+
+				event.preventDefault();
+				event.stopPropagation();
+
+				$sidebar.toggleClass('inactive');
+
+			});
+
+
+		// ============================================================
+		// ВАЖНО:
+		// Все касания внутри sidebar не должны закрывать его.
+		//
+		// Особенно важен touchend.
+		// Именно его не хватало в предыдущей версии.
+		// ============================================================
+
+		$sidebar.on(
+			'click touchstart touchmove touchend touchcancel wheel',
+			function(event) {
+				event.stopPropagation();
+			}
+		);
+
+
+		// ============================================================
+		// Ссылки внутри sidebar.
+		// При выборе страницы меню закрывается.
+		// ============================================================
+
+		$sidebar.on('click', 'a', function(event) {
+
+			var $a = $(this),
+				href = $a.attr('href'),
+				target = $a.attr('target');
+
+			// Гамбургер обрабатывается отдельно.
+			if ($a.hasClass('toggle'))
+				return;
+
+			// Пустые ссылки не трогаем.
+			if (!href || href == '#' || href == '')
+				return;
+
+			// Перед переходом закрываем sidebar.
 			$sidebar.addClass('inactive');
 
-			// Создаём кнопку-гамбургер.
-			$('<a href="#sidebar" class="toggle" aria-label="Открыть меню">Toggle</a>')
-				.appendTo($sidebar)
-				.on('click', function(event) {
+			// target="_blank".
+			if (target == '_blank') {
+				event.preventDefault();
+				window.open(href, '_blank');
+			}
 
-					// Не даём браузеру переходить к якорю #sidebar.
-					event.preventDefault();
-					event.stopPropagation();
+		});
 
-					// Открыть / закрыть панель.
-					$sidebar.toggleClass('inactive');
 
-				});
+		// ============================================================
+		// Закрытие при нажатии СНАРУЖИ sidebar.
+		//
+		// В отличие от старой версии здесь НЕ используется touchend.
+		// Поэтому свайпы, прокрутка и работа с формами не закрывают меню.
+		// ============================================================
 
-			// Клики по ссылкам внутри sidebar.
-			// После выбора страницы меню закрывается.
-			$sidebar.on('click', 'a', function(event) {
+		$(document).on('click', function(event) {
 
-				var $a = $(this),
-					href = $a.attr('href'),
-					target = $a.attr('target');
-
-				// Кнопка-гамбургер обрабатывается отдельно выше.
-				if ($a.hasClass('toggle'))
-					return;
-
-				// Не мешаем пустым ссылкам.
-				if (!href || href == '#' || href == '')
-					return;
-
-				// Закрываем панель перед переходом.
+			if (
+				!$sidebar.hasClass('inactive') &&
+				$(event.target).closest('#sidebar').length === 0
+			) {
 				$sidebar.addClass('inactive');
+			}
 
-				// Для обычной ссылки оставляем стандартный переход.
-				// Для target="_blank" открываем новую вкладку.
-				if (target == '_blank') {
-					event.preventDefault();
-					window.open(href, '_blank');
-				}
+		});
 
-			});
-
-			// События внутри панели не должны закрывать её.
-			$sidebar.on('click touchstart touchmove wheel', function(event) {
-				event.stopPropagation();
-			});
-
-			// Клик вне панели закрывает её.
-			$body.on('click touchend', function() {
-				$sidebar.addClass('inactive');
-			});
-
-		}
+	}
 
 	// Back to top.
 	// ---------------------------------------------------------------------
