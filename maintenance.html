@@ -1,0 +1,200 @@
+<!DOCTYPE HTML>
+<!--DISORDER CAFFE by DISORDER Official
+	TG | @TokyoUK210
+	CCA 3.0 license
+	DISORDER CAFFE страница поддержания Проекта
+-->
+<html>
+	<head>
+		<title>Спасибо!</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+		<!-- Main -->
+		<div id="main" class="wrapper">
+			<div class="inner">
+				<header id="header">
+                    <a href="index.html" class="logo">
+                        <strong>DISORDER CAFFE</strong> by DISORDER Official
+                    </a>
+
+                    <!-- Социальные сети. -->
+                    <ul class="icons">
+                        <li><a href="https://www.youtube.com/@disordercaffe" class="icon brands fa-youtube"><span class="label">YouTube</span></a></li>
+                        <li><a href="https://soundcloud.com/disordercaffe" class="icon brands fa-soundcloud"><span class="label">SoundCloud</span></a></li>
+                        <li><a href="https://www.tiktok.com/@disordercaffe" class="icon brands fa-tiktok"><span class="label">TikTok</span></a></li>
+                        <li><a href="x" class="icon brands fa-spotify"><span class="label">Spotify</span></a></li>
+                        <li><a href="https://t.me/TheBlogByGL" class="icon brands fa-telegram"><span class="label">Telegram</span></a></li>
+                        <li><a href="https://substack.com/@disordercaffe" class="icon brands fa-facebook"><span class="label">Substack</span></a></li>
+                        <li><a href="https://www.instagram.com/disordercaffe/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                        <li><a href="https://medium.com/@disorderofficial13/" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+                    </ul>
+                </header>
+				<p style="text-align: center;">Любая сумма - это вклад в развитие Проекта. Спасибо, что вы не безучастны. Ниже приведены адреса кошельков:</p>
+			</div>
+		</div>
+    <!-- ======================== КОШЕЛЬКИ ======================== -->
+
+    <div class="wallets">
+
+      <!-- ---------- USDT TRC-20 ---------- -->
+      <div class="wallet">
+        <div class="wallet-net">USDT — сеть TRC-20 (Tron)</div>
+        <div class="wallet-row">
+          <code class="wallet-addr" id="addr-usdt">TAjgwAHQd11VQwdHYbwFbKquEetKT8HLgZ</code>
+          <button class="copy-btn" data-target="addr-usdt" type="button">Скопировать</button>
+        </div>
+      </div>
+
+      <!-- ---------- BTC ---------- -->
+      <div class="wallet">
+        <div class="wallet-net">Bitcoin — сеть BTC (Bitcoin)</div>
+        <div class="wallet-row">
+          <code class="wallet-addr" id="addr-btc">bc1qrrm4j250phf6jx7qmnsp92mcpd9tp3w8vpunlq</code>
+          <button class="copy-btn" data-target="addr-btc" type="button">Скопировать</button>
+        </div>
+      </div>
+
+      <!-- ---------- ETH ERC-20 ---------- -->
+      <div class="wallet">
+        <div class="wallet-net">ETH / USDT — сеть ERC-20 (Ethereum)</div>
+        <div class="wallet-row">
+          <code class="wallet-addr" id="addr-eth">0x157286395178Cd40779823251d5b25978463f4a6</code>
+          <button class="copy-btn" data-target="addr-eth" type="button">Скопировать</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ======================== ПАМЯТКА ======================== -->
+
+    <div class="warning">
+      <strong>⚠️ Внимание:</strong> отправляйте средства только в той сети,
+      которая указана рядом с адресом. Перевод в другой сети может привести
+      к безвозвратной потере средств.
+    </div>
+
+    <!-- =========================================================== -->
+
+  </div>
+</div>
+
+<!-- Стили для блоков кошельков (инлайн, чтобы не трогать main.css) -->
+<style>
+  .wallets { margin: 2em auto 1.5em; max-width: 850px; }
+
+  .wallet {
+    margin-bottom: 1.5em;
+    padding: 1em 1.2em;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 8px;
+  }
+
+  .wallet-net {
+    font-weight: 600;
+    font-size: 0.95em;
+    margin-bottom: 0.6em;
+    opacity: 0.85;
+  }
+
+  .wallet-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    flex-wrap: wrap;
+  }
+
+  .wallet-addr {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9em;
+    word-break: break-all;
+    padding: 0.5em 0.7em;
+    background: rgba(0,0,0,0.05);
+    border-radius: 6px;
+  }
+
+  .copy-btn {
+    flex: 0 0 auto;
+    cursor: pointer;
+    padding: 0.55em 1em;
+    font-size: 0.85em;
+    font-weight: 600;
+    border: 1px solid rgba(0,0,0,0.25);
+    border-radius: 6px;
+    background: transparent;
+    color: inherit;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .copy-btn:hover { background: rgba(0,0,0,0.07); }
+
+  .copy-btn.copied {
+    background: #b2df77;
+    border-color: #2e7d32;
+    color: #fff;
+  }
+
+  .warning {
+    margin: 1em auto 0;
+    max-width: 850px;
+    padding: 0.9em 1.1em;
+    border-left: 4px solid #d9822b;
+    background: rgba(217, 130, 43, 0.233);
+    border-radius: 6px;
+    font-size: 0.92em;
+    line-height: 1.5;
+  }
+</style>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+<!-- Скрипт копирования адресов -->
+<script>
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var targetId = btn.getAttribute('data-target');
+      var el = document.getElementById(targetId);
+      if (!el) return;
+
+      var text = el.textContent.trim();
+var done = function () {
+        var original = btn.textContent;
+        btn.textContent = 'Скопировано ✓';
+        btn.classList.add('copied');
+        setTimeout(function () {
+          btn.textContent = original;
+          btn.classList.remove('copied');
+        }, 1800);
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(function () {
+          fallbackCopy(text, done);
+        });
+      } else {
+        fallbackCopy(text, done);
+      }
+    });
+  });
+
+  // Резервный способ для старых браузеров
+  function fallbackCopy(text, cb) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); cb(); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+</script>
