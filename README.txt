@@ -1,30 +1,63 @@
-Editorial by HTML5 UP
-html5up.net | @ajlkn
-Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+<!--
+	DISORDER CAFFE
+	by DISORDER Official
+	https://disordercaffe.github.io
+
+	Официальный сайт проекта DISORDER CAFFE.
+	Official website of the DISORDER CAFFE project.
+
+	Дизайн, вёрстка, контент и весь код переработаны с нуля
+	и являются интеллектуальной собственностью DISORDER Official.
+	Все права защищены.
+
+	Design, layout, content and all code have been rewritten from scratch
+	and are the intellectual property of DISORDER Official.
+	All rights reserved.
+
+	© DISORDER CAFFE. All rights reserved.
 
 
-Say hello to Editorial, a blog/magazine-ish template built around a toggleable "locking"
-sidebar (scroll down to see what I mean) and an accordion-style menu. Not the usual landing
-page/portfolio affair you'd expect to see at HTML5 UP, but I figured for my 41st (!!!)
-template I'd change it up a little. Enjoy :)
+	Контактная информация / Contact information:
 
-Demo images* courtesy of Unsplash, a radtastic collection of CC0 (public domain) images
-you can use for pretty much whatever.
+		Email:
+			disordercaffe@pm.me
+			info.disordercaffe@pm.me
+			info@disordercaffe.ru
 
-(* = not included)
+		Telegram:
+			Канал / Channel: @TheBlogByGL
+			Бот / Bot: @DisorderCaffeBot
 
-AJ
-aj@lkn.io | @ajlkn
+		Сайт / Website:
+			https://disordercaffe.github.io
+
+		GitHub:
+			https://github.com/DISORDERCAFFE
 
 
-Credits:
+	Социальные сети / Social media:
 
-	Demo Images:
-		Unsplash (unsplash.com)
+		YouTube:    https://www.youtube.com/@disordercaffe
+		SoundCloud: https://soundcloud.com/disordercaffe
+		TikTok:     https://www.tiktok.com/@disordercaffe
+		Telegram:   https://t.me/TheBlogByGL
+		Substack:   https://substack.com/@disordercaffe
+		Instagram:  https://www.instagram.com/disordercaffe/
+		Medium:     https://medium.com/@disorderofficial13/
 
-	Icons:
-		Font Awesome (fontawesome.io)
 
-	Other:
-		jQuery (jquery.com)
-		Responsive Tools (github.com/ajlkn/responsive-tools)
+	Использованные ресурсы / Credits:
+
+		Дизайн-основа / Design base:
+			HTML5 UP — Editorial (html5up.net | @ajlkn)
+			Лицензия / License: CCA 3.0 (html5up.net/license)
+
+		Иконки / Icons:
+			Font Awesome (fontawesome.io)
+
+		Библиотеки и инструменты / Libraries and tools:
+			jQuery (jquery.com)
+			Responsive Tools (github.com/ajlkn/responsive-tools)
+
+	DISORDER Official
+-->
